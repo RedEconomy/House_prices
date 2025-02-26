@@ -41,10 +41,10 @@ _Explanation for Price per m2: Captures the perceived value of the land. Large p
 
 | Model                        | MAE (Lower is better)      |
 | ---------------------------- | ---------------------      |
-| Random Forest                | **254396.04X**               |
-| New Features RF              | **274764.54**               |
-| Decision Tree                | **275608.33**               |
-| Linear Regression            | **345228.58**               |
+| Random Forest                | **254396.04X**             |
+| New Features RF              | **274764.54**              |
+| Decision Tree                | **275608.33**              |
+| Linear Regression            | **345228.58**              |
 
 ## 🛠 Dependencies
 
