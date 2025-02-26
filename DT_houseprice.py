@@ -84,7 +84,7 @@ model_rf.fit(train_X, train_y)
 rf_predictions = model_rf.predict(val_X)
 
 
-# Linear Regression Model
+# Scaled Linear Regression Model
 scaler = StandardScaler()
 train_X_scaled = scaler.fit_transform(train_X)
 val_X_scaled = scaler.transform(val_X)
@@ -108,7 +108,7 @@ plt.xticks(rotation=45, ha='right')
 plt.title("Feature Correlation Heatmap")
 plt.show()
 
-# Remove landsize == 0 and ensure len(y) for this part is straightened
+# Remove landsize == 0 and ensure 'y' for this part is straightened
 mask = melbourne_copy['Landsize'] > 0
 melbourne_copy = melbourne_copy[mask]
 y = y[mask]  # Filter y accordingly
@@ -121,11 +121,11 @@ X = melbourne_copy[new_features]
 
 # Training X and Y
 train_X, val_X, train_y, val_y1 = train_test_split(X, y, random_state=0, test_size=0.20)
-melbourne_model.fit(train_X, train_y)
+model_rf.fit(train_X, train_y)
 
 
 results = pd.DataFrame({
-    "Model": ["Decision Tree", "Random Forest", "Linear Regression", "New Features DT"],
+    "Model": ["Decision Tree", "Random Forest", "Linear Regression", "New Features RF"],
     "MAE": [mean_absolute_error(val_y, val_predictions),
             mean_absolute_error(val_y, rf_predictions),
             mean_absolute_error(val_y, lr_predictions),
