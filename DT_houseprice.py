@@ -106,9 +106,19 @@ plt.show()
 
 
 # New features
-X['Price_per_m2'] = y / X['Landsize']
-X['Rooms_per_Bathroom'] = X['Rooms'] / (X['Bathroom'] + 1)
 
-new_features = ['Rooms_per_Bathroom', 'Price_per_m2', 'Distance']
+melbourne_copy['Price_per_m2'] = y / melbourne_copy['Landsize']
+melbourne_copy.replace([float('inf'), -float('inf')], float('nan'), inplace=True)
+melbourne_copy['Price_per_m2'].fillna(melbourne_copy['Price_per_m2'].median(), inplace=True)
+new_features = ['Rooms', 'Bathroom', 'Price_per_m2', 'Distance']
+X = melbourne_copy[new_features]
+train_X, val_X, train_y, val_y = train_test_split(X, y, random_state=0, test_size=0.20)
+
+melbourne_model = DecisionTreeRegressor(max_depth=13, min_samples_split=2, min_samples_leaf=8, random_state=0)
+melbourne_model.fit(train_X, train_y)
+
+val_predictions = melbourne_model.predict(val_X)
+
+print(mean_absolute_error(val_y, val_predictions))
 
 
